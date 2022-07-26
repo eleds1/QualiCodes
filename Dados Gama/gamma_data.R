@@ -1,6 +1,6 @@
-#Author: Eduardo Ensslin
-#Script para a reprodução dos resultados obtidos no documento
-#de defesa de qualificação de doutorado.
+#Author: Eduardo AAA
+#Script para a reproduÃ§Ã£o dos resultados obtidos no documento
+#de defesa de qualificaÃ§Ã£o de doutorado.
 
 #carregando pacotes
 library(dplyr)
@@ -10,14 +10,14 @@ require(ggthemes)
 theme_set(theme_pander())
 require(reshape2)
 
-#semente para a reprodução dos dados
+#semente para a reproduÃ§Ã£o dos dados
 set.seed(123456, kind="Mersenne-Twister")
 
 ###################################################
 #     DADOS SIMULADOS COM DISTRIBUICAO GAMMA      #
 ###################################################
 
-#Definindo o valor dos parâmetros de escala e tamanho amostral
+#Definindo o valor dos parÃ¢metros de escala e tamanho amostral
 l1 <- 1
 l2 <- 10
 n1 <- 50
@@ -31,7 +31,7 @@ ggplot(data.frame(z), aes(x=1:100, y=z)) +
   geom_vline(xintercept = 50, col="darkorange") +
   xlab("N") + ylab("f(z)")
 
-#Estimação dos valores para uma distribuição gamma
+#EstimaÃ§Ã£o dos valores para uma distribuiÃ§Ã£o gamma
 Estim <- matrix(data=rep(0, 100), nrow=3, ncol=100)
 Estim[1,] <- 1:100
 
@@ -48,7 +48,7 @@ ggplot(Estim.df, aes(x=Position, y=Estimates, group=variable, col=variable)) +
   geom_line()
 
 
-#Conta auxiliar para o cômputo da estatística de teste
+#Conta auxiliar para o cÃ´mputo da estatÃ­stica de teste
 N <- ((n1*n2)/(n1+n2))
 
 #Definindo os valores fixados
@@ -59,7 +59,7 @@ beta=0.5
 #        SHANNON - DADOS SIMULADOS GAMMA          #
 ###################################################
 
-#Cálculo estatística de teste
+#CÃ¡lculo estatÃ­stica de teste
 SH <- rep(0, 100)
 
 for(el in 5:95) {
@@ -78,10 +78,10 @@ ggplot(data.frame(SH), aes(x=1:100, y=SH)) +
 
 
 ###################################################
-#         RÉNYI - DADOS SIMULADOS GAMMA           #                           
+#         RÃ‰NYI - DADOS SIMULADOS GAMMA           #                           
 ###################################################
 
-#Cálculo estatística de teste
+#CÃ¡lculo estatÃ­stica de teste
 SH <- rep(0, 100)
 
 #Contas auxiliares simplificadas
@@ -113,7 +113,7 @@ ggplot(data.frame(SH), aes(x=1:100, y=SH)) +
 #        ARIMOTO - DADOS SIMULADOS GAMMA          #                       
 ###################################################
 
-#Cálculo estatística de teste
+#CÃ¡lculo estatÃ­stica de teste
 SH <- rep(0, 100)
 
 #Contas auxiliares simplificadas
@@ -152,7 +152,7 @@ ggplot(data.frame(SH), aes(x=1:100, y=SH)) +
 #      HAVRDA-CHARVAT - DADOS SIMULADOS GAMMA     #                 
 ###################################################
 
-#Cálculo estatística de teste
+#CÃ¡lculo estatÃ­stica de teste
 SH <- rep(0, 100)
 
 #Contas auxiliares simplificadas
@@ -181,7 +181,7 @@ ggplot(data.frame(SH), aes(x=1:100, y=SH)) +
 #    SHARMA-MITTAL - DADOS SIMULADOS GAMMA        #                 
 ###################################################
 
-#Cálculo estatística de teste
+#CÃ¡lculo estatÃ­stica de teste
 SH <- rep(0, 100)
 
 #Contas auxiliares simplificadas
