@@ -8,9 +8,6 @@ require(ggthemes)
 theme_set(theme_pander())
 require(reshape2)
 
-#semente para a reprodução dos dados
-set.seed(123456, kind="Mersenne-Twister")
-
 
 ###################################################
 #     DETECÇAO DE BORDAS EM IMAGEM PHANTOM        #
@@ -24,11 +21,16 @@ phantom01 <- read.table("Phantom_gamf_0.000_1_2_1.txt",
 
 #Atribuindo a leitura dos dados como uma matriz
 z1 <- as.matrix(phantom01)
-dim(z1)
+#dimensao da matriz
+dim(z1) 
+#Gerando a Figura phantom
 image(z1, axes = F)
 
+#Transformando a matriz em um vetor
 z <-c(z1)
+#Atribuindo o intervalo de interesse
 z <- z[79001:81000]
+#Figura dos dados no intervalo selecionado 
 ggplot(data.frame(z), aes(x=1:2000, y=z)) +
   geom_line() +
   geom_vline(xintercept = 1000, col="darkorange") +
@@ -64,8 +66,11 @@ for(el in 5:1995) {
   lambda2 <- Estim[3,el]
   T_hphi[el] = N*(abs(sqrt(k))*(log(lambda2)-log(lambda1)))^2
 }
+#Valor maximo da estatística de teste
 edge <- which.max(T_hphi)
 #windows()
+
+#Gráfico estatística de teste Shannon
 ggplot(data.frame(T_hphi), aes(x=1:2000, y=T_hphi)) +
   geom_line() +
   xlab("n") + ylab(expression(T["(h,phi)"]))+
@@ -98,6 +103,8 @@ for(el in 5:1995) {
 }
 edge <- which.max(T_hphi)
 #windows()
+
+#Gráfico estatística de teste Renyi
 ggplot(data.frame(T_hphi), aes(x=1:2000, y=T_hphi)) +
   geom_line() +
   xlab("n") + ylab(expression(T["(h,phi)"]))+
@@ -138,6 +145,8 @@ for(el in 5:1995) {
 }
 edge <- which.max(T_hphi)
 #windows()
+
+#Gráfico estatística de teste Arimoto
 ggplot(data.frame(T_hphi), aes(x=1:2000, y=T_hphi)) +
   geom_line() +
   xlab("n") + ylab(expression(T["(h,phi)"]))+
@@ -167,6 +176,8 @@ for(el in 5:1995) {
 }
 edge <- which.max(T_hphi)
 #windows()
+
+#Gráfico estatística de teste Havrda-Charvat
 ggplot(data.frame(T_hphi), aes(x=1:2000, y=T_hphi)) +
   geom_line() +
   xlab("n") + ylab(expression(T["(h,phi)"]))+
@@ -195,6 +206,8 @@ for(el in 5:1995) {
 }
 edge <- which.max(T_hphi)
 #windows()
+
+#Gráfico estatística de teste Sharma-Mittal
 ggplot(data.frame(T_hphi), aes(x=1:2000, y=T_hphi)) +
   geom_line() +
   xlab("n") + ylab(expression(T["(h,phi)"]))+
