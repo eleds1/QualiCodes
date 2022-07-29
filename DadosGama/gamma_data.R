@@ -8,28 +8,29 @@ require(ggthemes)
 theme_set(theme_pander())
 require(reshape2)
 
-#semente para a reprodução dos dados
+#semente para reprodução dos dados e resultados
 set.seed(123456, kind="Mersenne-Twister")
 
 ###################################################
 #     DADOS SIMULADOS COM DISTRIBUICAO GAMMA      #
 ###################################################
 
-#Definindo o valor dos parâmetros de escala e tamanho amostral
+#Definindo o valor dos parâmetros de escala e tamanhos amostrais
 theta1 <- 1
 theta2 <- 10
 n1 <- 50
 n2 <- 50
 
-#Gerando os dados simulados ~ gamma
+#Gerando os dados simulados ~ gamma com os valores definidos e k=2
 z <- c(rgamma(n1, theta1,2), rgamma(n2, theta2,2))
 z
+#Gráfico dos dados simulados
 ggplot(data.frame(z), aes(x=1:100, y=z)) +
   geom_line() +
   geom_vline(xintercept = 50, col="darkorange") +
   xlab("N") + ylab("f(z)")
 
-#Estimação de máxima verossililhança dos valores para uma distribuição gamma
+#Estimação de máxima verossililhança para uma distribuição gamma
 Estim <- matrix(data=rep(0, 100), nrow=3, ncol=100)
 Estim[1,] <- 1:100
 
@@ -56,10 +57,13 @@ T_hphi <- rep(0, 100)
 for(el in 5:95) {
   theta1 <- Estim[2,el]
   theta2 <- Estim[3,el]
-  T_hphi[el] = N*(abs(sqrt(k))*(log(theta2)-log(theta1)))^2
+  T_hphi[el] = N*(abs(sqrt(k))*(log(theta2)-log(theta1)))^2 
 }
+#Valor maximo da estatística de teste
 edge <- which.max(T_hphi)
 #windows()
+
+#Gráfico estatística de teste Shannon
 ggplot(data.frame(T_hphi), aes(x=1:100, y=T_hphi)) +
   geom_line() +
   xlab("n") + ylab(expression(T["(h,phi)"]))+
@@ -92,6 +96,8 @@ for(el in 5:95) {
 }
 edge <- which.max(T_hphi)
 #windows()
+
+#Gráfico estatística de teste Renyi
 ggplot(data.frame(T_hphi), aes(x=1:100, y=T_hphi)) +
   geom_line() +
   xlab("n") + ylab(expression(T["(h,phi)"]))+
@@ -131,6 +137,8 @@ for(el in 5:95) {
 }
 edge <- which.max(T_hphi)
 #windows()
+
+#Gráfico estatística de teste Arimoto
 ggplot(data.frame(T_hphi), aes(x=1:100, y=T_hphi)) +
   geom_line() +
   xlab("n") + ylab(expression(T["(h,phi)"]))+
@@ -160,6 +168,8 @@ for(el in 5:95) {
 }
 edge <- which.max(T_hphi)
 #windows()
+
+#Gráfico estatística de teste Havrda-Charvat
 ggplot(data.frame(T_hphi), aes(x=1:100, y=T_hphi)) +
   geom_line() +
   xlab("n") + ylab(expression(T["(h,phi)"]))+
@@ -188,6 +198,8 @@ for(el in 5:95) {
 }
 edge <- which.max(T_hphi)
 #windows()
+
+#Gráfico estatística de teste Sharma-Mittal
 ggplot(data.frame(T_hphi), aes(x=1:100, y=T_hphi)) +
   geom_line() +
   xlab("n") + ylab(expression(T["(h,phi)"]))+
